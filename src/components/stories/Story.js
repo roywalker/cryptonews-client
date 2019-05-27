@@ -14,7 +14,7 @@ const Story = ({ story, commentsView }) => {
         author={story.author}
         comments={story.comments}
         date={story.date}
-        localUrl={`/n/${story.localUrl}`}
+        slug={`/n/${story.slug}`}
         commentsView={commentsView}
       />
     </article>

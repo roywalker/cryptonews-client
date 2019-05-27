@@ -9,6 +9,7 @@ const List = ({ comments }) => {
       </h3>
       {comments.results.map(comment => (
         <Comment
+          key={comment.id}
           author={comment.author}
           date={comment.date}
           comment={comment.comment}
