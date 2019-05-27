@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Author = () => {
+const Author = ({ author, date }) => {
   return (
     <div className='author'>
-      <span>GWOLF</span> | <time datetime=''>3 hours ago</time>
+      <span>{author}</span> | <time dateTime=''>{date}</time>
     </div>
   );
 };

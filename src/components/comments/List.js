@@ -1,11 +1,20 @@
 import React from 'react';
 import Comment from './Comment';
 
-const List = () => {
+const List = ({ comments }) => {
   return (
     <section className='comments'>
-      <h3>3 comments</h3>
-      <Comment />
+      <h3>
+        {comments.count} {comments.count === '1' ? 'comment' : 'comments'}
+      </h3>
+      {comments.results.map(comment => (
+        <Comment
+          author={comment.author}
+          date={comment.date}
+          comment={comment.comment}
+          votes={comment.votes}
+        />
+      ))}
     </section>
   );
 };

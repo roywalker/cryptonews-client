@@ -3,14 +3,14 @@ import VoteButton from './VoteButton';
 import Author from './Author';
 import CommentText from './CommentText';
 
-const Comment = () => {
+const Comment = ({ author, date, comment, votes }) => {
   return (
     <article>
       <header>
-        <VoteButton />
-        <Author />
+        <VoteButton votes={votes} />
+        <Author author={author} date={date} />
       </header>
-      <CommentText />
+      <CommentText text={comment} />
     </article>
   );
 };

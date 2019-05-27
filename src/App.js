@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './components/sidebar';
-import Links from './components/links';
+import Stories from './components/stories';
 import Comments from './components/comments';
 import Header from './components/header';
 import Login from './components/forms/Login';
@@ -13,7 +13,7 @@ function App() {
     <div className='App'>
       <div className='main-column'>
         <Header />
-        <Route exact path='/' component={Links} />
+        <Route exact path='/' component={Stories} />
         <Route path='/n/:slug' component={Comments} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />

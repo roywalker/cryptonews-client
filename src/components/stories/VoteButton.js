@@ -1,9 +1,9 @@
 import React from 'react';
 
-const VoteButton = () => {
+const VoteButton = ({ votes }) => {
   return (
     <button>
-      ^ <span>123</span>
+      ^ <span>{votes}</span>
     </button>
   );
 };
