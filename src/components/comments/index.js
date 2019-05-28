@@ -5,19 +5,28 @@ import axios from 'axios';
 
 const CommentsList = ({ match }) => {
   const [story, setStory] = useState('');
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchStory() {
-      const res = await axios(
-        `http://localhost:3001/api/post/${match.params.slug}`
-      );
-      setStory(res.data);
+      setError(false);
+      try {
+        const res = await axios(
+          `https://cryptonews-server.herokuapp.com/api/post/${
+            match.params.slug
+          }`
+        );
+        setStory(res.data);
+      } catch (err) {
+        setError(true);
+      }
     }
 
     fetchStory();
   }, [match.params.slug, story]);
 
-  if (!story) return null;
+  if (error) return <div>Something went wrong...</div>;
+  if (!story) return <div>Loading...</div>;
 
   return (
     <>

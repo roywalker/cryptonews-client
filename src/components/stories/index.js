@@ -4,15 +4,26 @@ import axios from 'axios';
 
 const StoriesList = () => {
   const [stories, setStories] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchStories() {
-      const res = await axios('http://localhost:3001/api/posts');
-      setStories(res.data.results);
+      try {
+        setError(false);
+        const res = await axios(
+          'https://cryptonews-server.herokuapp.com/api/posts'
+        );
+        setStories(res.data.results);
+      } catch (err) {
+        setError(true);
+      }
     }
 
     fetchStories();
   }, []);
+
+  if (error) return <div>Something went wrong...</div>;
+  if (!stories.length) return <div>Loading...</div>;
 
   return (
     <section className='stories-list'>
