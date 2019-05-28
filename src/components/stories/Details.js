@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Details = ({ author, date, comments, slug, commentsView }) => {
   return (
     <div className='details'>
       by {author} | <time dateTime=''>{date}</time> |{' '}
       {!commentsView ? (
-        <a href={slug}>
+        <Link to={slug}>
           {comments} {comments === '1' ? 'comment' : 'comments'}
-        </a>
+        </Link>
       ) : null}
     </div>
   );

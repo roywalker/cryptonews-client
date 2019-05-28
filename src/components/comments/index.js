@@ -1,32 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Story from '../stories/Story';
 import List from './List';
-import axios from 'axios';
+import useApi from '../../hooks/useApi';
 
 const CommentsList = ({ match }) => {
-  const [story, setStory] = useState('');
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    async function fetchStory() {
-      setError(false);
-      try {
-        const res = await axios(
-          `https://cryptonews-server.herokuapp.com/api/post/${
-            match.params.slug
-          }`
-        );
-        setStory(res.data);
-      } catch (err) {
-        setError(true);
-      }
-    }
-
-    fetchStory();
-  }, [match.params.slug, story]);
+  const [story, loading, error] = useApi(
+    `https://cryptonews-server.herokuapp.com/api/post/${match.params.slug}`
+  );
 
   if (error) return <div>Something went wrong...</div>;
-  if (!story) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <>

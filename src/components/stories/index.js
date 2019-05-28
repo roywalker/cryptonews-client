@@ -1,33 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Story from './Story';
-import axios from 'axios';
+import useApi from '../../hooks/useApi';
 
 const StoriesList = () => {
-  const [stories, setStories] = useState([]);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    async function fetchStories() {
-      try {
-        setError(false);
-        const res = await axios(
-          'https://cryptonews-server.herokuapp.com/api/posts'
-        );
-        setStories(res.data.results);
-      } catch (err) {
-        setError(true);
-      }
-    }
-
-    fetchStories();
-  }, []);
+  const [stories, loading, error] = useApi(
+    'https://cryptonews-server.herokuapp.com/api/posts'
+  );
 
   if (error) return <div>Something went wrong...</div>;
-  if (!stories.length) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <section className='stories-list'>
-      {stories.map(story => (
+      {stories.results.map(story => (
         <Story key={story.id} story={story} />
       ))}
     </section>
