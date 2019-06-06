@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Box from './Box';
 import Footer from './Footer';
 import AddButton from './AddButton';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../auth/AuthContext';
 
-const index = () => {
+const Sidebar = () => {
+  const [user] = useContext(UserContext);
+
   return (
     <aside>
       <AddButton />
 
       <Box>
-        <Link to={'/login'}>Login</Link>
-        <Link to={'/register'}>Register</Link>
+        {user.isLoggedIn ? (
+          <>
+            <Link to={'/account'}>{user.username}</Link>
+            <Link to={'/logout'}>Logout</Link>
+          </>
+        ) : (
+          <>
+            <Link to={'/login'}>Log in</Link>
+            <Link to={'/register'}>Register</Link>
+          </>
+        )}
       </Box>
 
       <Box heading='Popular'>
@@ -34,4 +46,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Sidebar;

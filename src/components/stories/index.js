@@ -1,10 +1,13 @@
 import React from 'react';
 import Story from './Story';
-import useApi from '../../hooks/useApi';
+import { useGet } from 'use-http';
 
 const StoriesList = () => {
-  const [stories, loading, error] = useApi(
-    'https://cryptonews-server.herokuapp.com/api/posts'
+  const { data: stories, error, loading } = useGet(
+    'https://cryptonews-server.herokuapp.com/api/posts',
+    {
+      onMount: true
+    }
   );
 
   if (error) return <div>Something went wrong...</div>;
